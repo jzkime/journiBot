@@ -7,14 +7,12 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { REST, SlashCommandBuilder, Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 require('dotenv').config();
 const env = process.env;
 
-
-
 const commands = [];
-const commandsPath = path.join(__dirname, commands);
+const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for(const file of commandFiles) {

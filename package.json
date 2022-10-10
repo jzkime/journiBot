@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bot": "nodemon index.js"
+    "bot": "nodemon index.js",
+    "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,8 @@
   "dependencies": {
     "discord.js": "^14.5.0",
     "dotenv": "^16.0.3",
-    "nodemon": "^2.0.20"
+    "knex": "^2.3.0",
+    "nodemon": "^2.0.20",
+    "sqlite3": "^5.1.2"
   }
 }

@@ -1,17 +1,19 @@
 const { SlashCommandBuilder} = require('discord.js');
-
-const luv = require('../love/luv-phrases');
+const luvModel = require('../commandModels/luvModel');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('love')
         .setDescription('replies with a romantic phrase'),
     async execute(interaction) {
-        interaction.reply(sendLuv());
+        await interaction.deferReply();
+        const luv = await sendLuv();
+        await interaction.editReply(luv);
     }
 }
 
-const sendLuv = () => {
-    const num = Math.floor(Math.random() * luv.length);
-    return luv[num];
+const sendLuv = async () => {
+    const luvarr = await luvModel.findMessage();
+    const num = Math.floor(Math.random() * luvarr.length);
+    return luvarr[num].message;
 }
