@@ -9,7 +9,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { REST, Routes } = require('discord.js');
 require('dotenv').config();
-const env = process.env;
+const {CLIENT_ID, GUILD_ID, TOKEN} = process.env;
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
@@ -21,8 +21,8 @@ for(const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 
-const rest = new REST({version: 10}).setToken(process.env.TOKEN);
+const rest = new REST({version: 10}).setToken(TOKEN);
 
-rest.put(Routes.applicationGuildCommands(env.CLIENT_ID, env.GUILD_ID), {body: commands})
+rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {body: commands})
     .then(data => console.log(`successfully registered ${data.length} application commands`))
     .catch(console.error)

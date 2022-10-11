@@ -2,8 +2,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const bot = new Client({intents: [GatewayIntentBits.Guilds]});
+const bot = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 require('dotenv').config();
+
+// const {watch} = require('./features/messageWatch/watch');
 
 bot.commands = new Collection();
 
@@ -20,6 +22,19 @@ for(const file of commandFiles) {
 bot.once("ready", () => {
     console.log(`Logged in as ${bot.user.tag}`);
 });
+
+// bot.on('messageCreate', watch);
+
+bot.on('interactionCreate', async interaction => {
+    if(!interaction.isSelectMenu()) return;
+
+    switch(interaction.customId) {
+        case('type-char'):
+            return await interaction.update({content: `you selected to be a ${interaction.values[0]}`, components: [], embeds: []})
+        default:
+            return interaction;
+    }
+})
 
 bot.on("interactionCreate", async interaction => {
     if(!interaction.isChatInputCommand()) return;
