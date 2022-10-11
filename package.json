@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bot": "nodemon index.js",
-    "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
+    "resetdb": "knex migrate:rollback --all && knex migrate:latest && knex seed:run"
   },
   "keywords": [],
   "author": "",

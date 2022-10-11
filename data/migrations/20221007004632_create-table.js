@@ -1,10 +1,10 @@
 exports.up = function(knex) {
-  return knex.schema.createTable('messages', tbl => {
-    tbl.increments('message_id');
-    tbl.string('message');
+  return knex.schema.createTable('love', tbl => {
+    tbl.increments('love_id');
+    tbl.string('love_message');
   })
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('messages')
+  return knex.schema.dropTableIfExists('love')
 };
