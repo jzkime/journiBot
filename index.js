@@ -5,8 +5,6 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const bot = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 require('dotenv').config();
 
-// const {watch} = require('./features/messageWatch/watch');
-
 bot.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -23,7 +21,8 @@ bot.once("ready", () => {
     console.log(`Logged in as ${bot.user.tag}`);
 });
 
-// bot.on('messageCreate', watch);
+const {watch} = require('./features/messageWatch/watch');
+bot.on('messageCreate', watch);
 
 bot.on('interactionCreate', async interaction => {
     if(!interaction.isSelectMenu()) return;
