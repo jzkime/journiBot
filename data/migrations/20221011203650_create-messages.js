@@ -5,12 +5,15 @@ exports.up = function(knex) {
   }).createTable('messages', tbl => {
     tbl.increments('message_id');
     tbl.string('user_id')
-        .references('user_id')
-        .inTable('users')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-        .notNullable();
-    tbl.string('message');
+      .references('user_id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
+      .notNullable();
+    tbl.integer('timestamp')
+      .notNullable();
+    tbl.string('message')
+      .notNullable();
   })
 };
 
