@@ -14,7 +14,7 @@ function parseMessageSave(m, id, time) {
 async function messageSave(m, id, time) {
     try{
         const newM = await watchMod.addMessage(m, id, time);
-        return({message: `new message: ${newM.m}, ${newM.time}`});
+        return({message: `new message: ${newM.message}, ${newM.timestamp}`});
     } catch(err) {
         console.error(err);
     }

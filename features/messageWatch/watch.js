@@ -4,9 +4,15 @@ async function watch(message) {
     const { content, author, createdTimestamp } = message;
     if(message.author.bot) return;
     if(message.content.split(' ').length <= 5) return;
-    const parsed = await parseMessageSave(content, author.id, createdTimestamp);
-    console.log(parsed)
-    message.reply(parsed.message)
+    await parseMessageSave(content, author.id, createdTimestamp);
+    /**
+     bot does not reply when saved
+     message.reply(parsed.message)
+     */
+    message.react('🫠')
+    /**
+     bot reacts when it saves into db
+     */
 }
 
 module.exports = { watch };

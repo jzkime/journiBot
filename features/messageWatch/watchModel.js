@@ -1,7 +1,6 @@
 const db = require('../../data/knexconfig');
 
 const findUser = (id) => {
-    console.log(id)
     return db('users as u')
         .leftJoin('messages as m', 'u.user_id', 'm.user_id')
         .select('u.user_id', 'discord_id', 'message', 'message_id', 'timestamp')
@@ -24,11 +23,17 @@ const addMessage = async (m, u, time) => {
             return change;
         }
         else
-            return db('messages').insert({message: m, user_id: o.user_id, timestamp: time});
+            return await insertMessageDB(m, o.user_id, time);
     } else {
         const user = await addUser(u);
-        return db('messages').insert({message: m, user_id: user, timestamp: time})
+        return await insertMessageDB(m, user, time);
     }
+}
+
+const insertMessageDB = async (message, user_id, timestamp) => {
+    return db('messages')
+        .insert({message, user_id, timestamp})
+        .then(() => ({message, timestamp}));
 }
 
 const findOldestMessage = (obj) => {
@@ -38,11 +43,11 @@ const findOldestMessage = (obj) => {
     return message_id;
 }
 
-const changeMessage = (m, message_id, time) => {
+const changeMessage = (message, message_id, timestamp) => {
     return db('messages')
         .where({message_id})
-        .update({message: m, timestamp: time})
-        .then(() => ({m, time}))
+        .update({message, timestamp})
+        .then(() => ({message, timestamp}))
 }
 
 module.exports = { addMessage };
