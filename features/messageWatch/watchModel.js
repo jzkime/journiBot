@@ -50,4 +50,4 @@ const changeMessage = (message, message_id, timestamp) => {
         .then(() => ({message, timestamp}))
 }
 
-module.exports = { addMessage };
+module.exports = { addMessage, findUser };

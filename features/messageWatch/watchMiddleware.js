@@ -1,13 +1,14 @@
 const watchMod = require('./watchModel');
+const filter = require('../../data/filterwords');
 
 function parseMessageSave(m, id, time) {
-    console.log(m, id);
     const sM = m.split(' ');
     const set = new Set();
     for(w of sM) {
-        if(w.length>=3) set.add(w);
+        if(w.length>=5 && !(/\p{Extended_Pictographic}/u.test(w)) && !filter.includes(w)) set.add(w);
     }
     const joined = Array.from(set).join(' ');
+    if(!joined.length) return;
     return res = messageSave(joined, id, time);
 }
 
@@ -19,13 +20,5 @@ async function messageSave(m, id, time) {
         console.error(err);
     }
 }
-
-// function parseForMeme(m) {
-//     const splitM = m.split(' ');
-//     const map = {};
-//     for(w of splitM) {
-//         if(w.length >= 3 && !(w in map)) map[w] = 1; 
-//     }
-// }
 
 module.exports = { parseMessageSave };
