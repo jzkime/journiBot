@@ -1,5 +1,5 @@
 const watchMod = require('./watchModel');
-const filter = require('../../data/filterwords');
+const filter = require('../../data/staticData/filterwords');
 
 function parseMessageSave(m, id, time) {
     const sM = m.split(' ');
