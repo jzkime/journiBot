@@ -8,14 +8,17 @@ function parseMessageSave(m, id, time) {
         if(w.length>=5 && !(/\p{Extended_Pictographic}/u.test(w)) && !filter.includes(w)) set.add(w);
     }
     const joined = Array.from(set).join(' ');
-    if(!joined.length) return;
+    if(!joined.length) return(false);
     return res = messageSave(joined, id, time);
 }
 
 async function messageSave(m, id, time) {
     try{
         const newM = await watchMod.addMessage(m, id, time);
-        return({message: `new message: ${newM.message}, ${newM.timestamp}`});
+        // returns true to watch command to send reaction
+        return(true)
+        // if sending a message to the bot to reply with
+        // return({message: `new message: ${newM.message}, ${newM.timestamp}`});
     } catch(err) {
         console.error(err);
     }
