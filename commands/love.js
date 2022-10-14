@@ -15,5 +15,5 @@ module.exports = {
 const sendLuv = async () => {
     const luvarr = await luvModel.findMessage();
     const num = Math.floor(Math.random() * luvarr.length);
-    return luvarr[num].message;
+    return luvarr[num].love_message;
 }
