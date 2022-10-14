@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const luvMod = require('../commandModels/luvModel');
+const luvModel = require('../features/models/luvModel');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,12 +11,12 @@ module.exports = {
         ),
     async execute(interaction) {
         const string = interaction.options.getString('input')
-        if(!string) interaction.reply('enter an input!')
+        if(!string) interaction.reply({content: 'enter an input!', ephemeral: true})
         else {
             try {
                 await interaction.deferReply();
-                const rm = await luvMod.addMessage(string)
-                interaction.editReply(`${rm.message} has been added`);
+                const rm = await luvModel.addMessage(string)
+                interaction.editReply(`${rm.love_message} has been added`);
             } catch(err) {
                 console.error(err)
                 interaction.reply('error')

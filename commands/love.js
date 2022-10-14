@@ -1,5 +1,5 @@
 const { SlashCommandBuilder} = require('discord.js');
-const luvModel = require('../commandModels/luvModel');
+const luvModel = require('../features/models/luvModel')
 
 module.exports = {
     data: new SlashCommandBuilder()
