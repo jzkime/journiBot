@@ -12,8 +12,8 @@ module.exports = {
                     .setPlaceholder('nothing selected')
                     .addOptions(
                         {
-                            label: 'cute',
-                            description: 'pickkkk',
+                            label: 'kawaii',
+                            description: 'u///u',
                             value: 'cutie'
                         },
                         {
@@ -23,7 +23,7 @@ module.exports = {
                         },
                         {
                             label: 'baka',
-                            description: 'totally not poisonous',
+                            description: 'why would you do that...',
                             value: 'mega baka'
                         }
                     )
@@ -31,8 +31,8 @@ module.exports = {
 
         const embed = new EmbedBuilder()
                 .setColor(0x6d33b4)
-                .setTitle('what type do you select?')
-                .setDescription('pick what kind of character you want to be associated with')
+                .setTitle('Character Type')
+                .setDescription('pick a character type')
 
             await interaction.reply({content: 'oya oya?', ephemeral: true, embeds: [embed], components: [row]})
     }
