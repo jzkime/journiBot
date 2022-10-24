@@ -18,5 +18,4 @@ returns a random phrase from the database
 adds a new phrase in the 'love' database, that can later be randomly called with __/love__
  
 ### /type
-shows an embed and dropdown to choose certain character types from
-* has no ultimate use as it is not saved
+displays use of embeds and dropdowns to choose certain character types from
